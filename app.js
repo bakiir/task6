@@ -1,19 +1,18 @@
-const express = require("express")
-const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
-const config = require('./config/db')
-const cors = require('cors')
-const account = require('./routes/account')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const account = require('./routes/account');
 
-app = express()
-app.use(cors())
-app.use(bodyParser.json())
-app.listen(4545, ()=>{
-    console.log("running on port 4545");
-})
+const app = express();
 
-app.use(bodyParser.json())
+app.use(cors());
+app.use(bodyParser.json());
 
-mongoose.connect(config.db).then(console.log("connected to db")).catch(console.log("failed to connect"))
+app.use('/account', account);
 
-app.use("/account", account)
+const PORT = 4545;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+module.exports = app; // чтобы работали тесты supertest

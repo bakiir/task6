@@ -13,11 +13,7 @@ app.listen(4545, ()=>{
 })
 
 app.use(bodyParser.json())
-mongoose.connect(config.db) .then(()=>{
-    console.log("Connected to db")
-})
-    .catch(()=>{
-        console.log("Connection failed!")
-    })
+
+mongoose.connect(config.db).then(console.log("connected to db")).catch(console.log("failed to connect"))
 
 app.use("/account", account)

@@ -29,44 +29,14 @@ router.post('/reg', async (req, res)=>{
     }
 })
 
-router.put('/:id', async (req, res) => {
-    try {
-        const updatedUser = await User.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
-        res.json(updatedUser);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error while updating user' });
-    }
-});
 
+router.put('/:id', async (req, res)=>{
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, reg.body, {new:true})
+    res.json(updatedUser)
+})
 
-router.delete('/:id', async (req, res) => {
-    try {
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
-        res.json({ success: true, message: 'User deleted', user: deletedUser });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Server error during deletion' });
-    }
-});
-
-router.put('/:id', async (req, res) => {
-    try {
-        const updatedUser = await User.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
-        res.json(updatedUser);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error while updating user' });
-    }
-});
-
-
+router.delete('/:id', async (req, res)=>{
+    const deletedUser = await User.findByIdAndDelete(req.params.id)
+    res.json({succes:false, msg:""})
+})
 module.exports = router
